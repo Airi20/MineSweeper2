@@ -229,23 +229,12 @@ const MinesweeperApp = () => {
 
 
   {/* 長押し＆右クリックの説明 */}
-  <div style={{ marginBottom: 10, fontSize: '14px', color: '#555' }}>
-    スマホはセルを長押しで🚩旗立て、PCは右クリックで🚩旗立てできるよ～
+  <div style={{ margin: '10px 0', fontSize: '14px', color: '#555' }}>
+  スマホはセルを長押しで🚩旗立て、PCは右クリックで🚩旗立てできるよ～
   </div>
 
-  <button
-    onClick={resetGame}
-    style={{
-      background: 'pink',
-      padding: '8px 16px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      borderRadius: '12px',
-      fontSize: '16px',
-    }}
-  >
-    🔁 リセット
-  </button>
+
+  
 
       {gameOver && (
   <div style={{ marginTop: 20, fontSize: '15px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
