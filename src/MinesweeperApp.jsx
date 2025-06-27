@@ -186,7 +186,7 @@ const MinesweeperApp = () => {
       }}
     >
       <h2 style={{ fontSize: '28px', marginBottom: '10px' }}>
-        ゆくゆくはDBと連携してタイム競えるようにする - {nickname}
+        最近フロントだけで楽してるしレポート終わったらDBと連携してタイム競えるようにする - {nickname}
       </h2>
 
       <div
