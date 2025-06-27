@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const CELL_SIZE = 44;
 const ROWS = 10;
 const COLS = 10;
 const MINES = 10;
@@ -38,7 +37,7 @@ const generateBoard = () => {
   return board;
 };
 
-const Cell = ({ data, onClick, onRightClick, onTouchStart, onTouchEnd }) => {
+const Cell = ({ data, onClick, onRightClick, onTouchStart, onTouchEnd, size }) => {
   let content = '';
   if (data.revealed) {
     if (data.mine) content = '💣';
@@ -53,8 +52,8 @@ const Cell = ({ data, onClick, onRightClick, onTouchStart, onTouchEnd }) => {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       style={{
-        width: CELL_SIZE,
-        height: CELL_SIZE,
+        width: size,
+        height: size,
         border: '1px solid black',
         backgroundColor: data.revealed ? '#ccc' : '#eee',
         display: 'flex',
@@ -71,18 +70,22 @@ const Cell = ({ data, onClick, onRightClick, onTouchStart, onTouchEnd }) => {
   );
 };
 
+const getCellSize = () => {
+  if (window.innerWidth < 400) return 28;
+  if (window.innerWidth < 600) return 32;
+  return 44;
+};
+
 const MinesweeperApp = () => {
   const [board, setBoard] = useState(generateBoard());
   const [gameOver, setGameOver] = useState(false);
   const [win, setWin] = useState(false);
   const [nickname, setNickname] = useState('');
   const [isMobile, setIsMobile] = useState(false);
-
-  // 長押し用タイマー保持
+  const [cellSize, setCellSize] = useState(getCellSize());
   const longPressTimeout = useRef(null);
 
   useEffect(() => {
-    // ニックネームは毎回聞く（ここ省略してもOK）
     const askName = () => {
       let name = '';
       while (!name) {
@@ -91,9 +94,11 @@ const MinesweeperApp = () => {
       setNickname(name);
     };
     askName();
-
-    // スマホ判定
     setIsMobile(/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+
+    const handleResize = () => setCellSize(getCellSize());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const revealCell = (r, c, newBoard) => {
@@ -112,7 +117,6 @@ const MinesweeperApp = () => {
     }
   };
 
-  
   const checkWin = (board) => {
     return board.flat().every(cell => cell.mine || cell.revealed);
   };
@@ -144,27 +148,21 @@ const MinesweeperApp = () => {
     setBoard(newBoard);
   };
 
-  // スマホ長押し開始
   const handleTouchStart = (r, c) => {
     if (gameOver) return;
     longPressTimeout.current = setTimeout(() => {
-      // 長押し成功 → 旗立て切り替え
       const newBoard = board.map(row => row.map(cell => ({ ...cell })));
       newBoard[r][c].flagged = !newBoard[r][c].flagged;
       setBoard(newBoard);
-    }, 600); // 600ms長押しで発動
+    }, 600);
   };
 
-  // スマホ長押し終了
   const handleTouchEnd = () => {
     if (longPressTimeout.current) {
       clearTimeout(longPressTimeout.current);
       longPressTimeout.current = null;
     }
   };
-
-  const CELL_SIZE = window.innerWidth < 600 ? 32 : 44; // スマホなら小さく
-
 
   const resetGame = () => {
     setBoard(generateBoard());
@@ -173,67 +171,69 @@ const MinesweeperApp = () => {
   };
 
   return (
-  <div
-    style={{
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff0f5',
-      fontFamily: "'Comic Neue', cursive",
-      textAlign: 'center',
-      padding: '20px',
-      boxSizing: 'border-box',
-    }}
-  >
-    <h2 style={{ fontSize: '32px', marginBottom: '10px' }}>
-      🎀💣 マインスイーパー - {nickname} 💣🎀
-    </h2>
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${COLS}, ${window.innerWidth < 600 ? 32 : 44}px)`,
-        border: '2px solid pink',
-        marginBottom: '10px',
-        userSelect: 'none',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff0f5',
+        fontFamily: "'Comic Neue', cursive",
+        textAlign: 'center',
+        padding: '20px',
+        boxSizing: 'border-box',
       }}
     >
-      {board.map((row, r) =>
-        row.map((cell, c) => (
-          <Cell
-            key={`${r}-${c}`}
-            data={cell}
-            onClick={() => handleClick(r, c)}
-            onRightClick={isMobile ? undefined : (e) => handleRightClick(e, r, c)}
-            onTouchStart={isMobile ? () => handleTouchStart(r, c) : undefined}
-            onTouchEnd={isMobile ? handleTouchEnd : undefined}
-          />
-        ))
+      <h2 style={{ fontSize: '28px', marginBottom: '10px' }}>
+        ゆくゆくはDBと連携してタイム競えるようにする - {nickname}
+      </h2>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${COLS}, ${cellSize}px)`,
+          border: '2px solid pink',
+          marginBottom: '10px',
+          userSelect: 'none',
+        }}
+      >
+        {board.map((row, r) =>
+          row.map((cell, c) => (
+            <Cell
+              key={`${r}-${c}`}
+              data={cell}
+              onClick={() => handleClick(r, c)}
+              onRightClick={isMobile ? undefined : (e) => handleRightClick(e, r, c)}
+              onTouchStart={isMobile ? () => handleTouchStart(r, c) : undefined}
+              onTouchEnd={isMobile ? handleTouchEnd : undefined}
+              size={cellSize}
+            />
+          ))
+        )}
+      </div>
+
+      <button
+        onClick={resetGame}
+        style={{
+          background: 'pink',
+          padding: '8px 16px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          borderRadius: '12px',
+          fontSize: '16px',
+        }}
+      >
+        🔁 リセット
+      </button>
+
+      {gameOver && (
+        <div style={{ marginTop: 20, fontSize: '24px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
+          {win ? '🎉 YOU WIN! 🎉' : '💥 YOU LOSE 💥'}
+        </div>
       )}
     </div>
-
-    <button
-      onClick={resetGame}
-      style={{
-        background: 'pink',
-        padding: '8px 16px',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        borderRadius: '12px',
-        fontSize: '16px',
-      }}
-    >
-      🔁 リセット
-    </button>
-
-    {gameOver && (
-      <div style={{ marginTop: 20, fontSize: '24px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
-        {win ? '🎉 YOU WIN! 🎉' : '💥 YOU LOSE 💥'}
-      </div>
-    )}
-  </div>
-);
-}
+  );
+};
 
 export default MinesweeperApp;
