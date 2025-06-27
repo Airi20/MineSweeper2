@@ -186,7 +186,7 @@ const MinesweeperApp = () => {
       }}
     >
       <h2 style={{ fontSize: '15px', marginBottom: '10px' }}>
-        最近フロントだけで楽してるしレポート終わったらDBと連携してタイム競えるようにする - {nickname}
+        最近フロントだけで楽してるしレポート終わったらDBと連携してタイム競えるようにする
       </h2>
 
       <div
@@ -229,7 +229,7 @@ const MinesweeperApp = () => {
 
       {gameOver && (
         <div style={{ marginTop: 20, fontSize: '24px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
-          {win ? '🎉 YOU WIN! 🎉' : '💥 YOU LOSE 💥'}
+          {win ? '🎉 {nickname}、天才! 🎉' : '💥 {nickname}、次頑張れ 💥'}
         </div>
       )}
     </div>
