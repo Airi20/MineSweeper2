@@ -112,6 +112,7 @@ const MinesweeperApp = () => {
     }
   };
 
+  
   const checkWin = (board) => {
     return board.flat().every(cell => cell.mine || cell.revealed);
   };
@@ -162,6 +163,9 @@ const MinesweeperApp = () => {
     }
   };
 
+  const CELL_SIZE = window.innerWidth < 600 ? 32 : 44; // スマホなら小さく
+
+
   const resetGame = () => {
     setBoard(generateBoard());
     setGameOver(false);
@@ -169,44 +173,67 @@ const MinesweeperApp = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>マインスイーパー - {nickname}</h2>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${COLS}, ${CELL_SIZE}px)`,
-          border: '2px solid pink',
-          marginBottom: '10px',
-          width: `${COLS * CELL_SIZE}px`,
-          userSelect: 'none',
-        }}
-      >
-        {board.map((row, r) =>
-          row.map((cell, c) => (
-            <Cell
-              key={`${r}-${c}`}
-              data={cell}
-              onClick={() => handleClick(r, c)}
-              onRightClick={isMobile ? undefined : (e) => handleRightClick(e, r, c)}
-              onTouchStart={isMobile ? () => handleTouchStart(r, c) : undefined}
-              onTouchEnd={isMobile ? handleTouchEnd : undefined}
-            />
-          ))
-        )}
-      </div>
-      <button
-        onClick={resetGame}
-        style={{ background: 'pink', padding: '8px 16px', fontWeight: 'bold', cursor: 'pointer' }}
-      >
-        リセット
-      </button>
-      {gameOver && (
-        <div style={{ marginTop: 20, fontSize: '20px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
-          {win ? 'YOU WIN!' : 'YOU LOSE!'}
-        </div>
+  <div
+    style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#fff0f5',
+      fontFamily: "'Comic Neue', cursive",
+      textAlign: 'center',
+      padding: '20px',
+      boxSizing: 'border-box',
+    }}
+  >
+    <h2 style={{ fontSize: '32px', marginBottom: '10px' }}>
+      🎀💣 マインスイーパー - {nickname} 💣🎀
+    </h2>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${COLS}, ${window.innerWidth < 600 ? 32 : 44}px)`,
+        border: '2px solid pink',
+        marginBottom: '10px',
+        userSelect: 'none',
+      }}
+    >
+      {board.map((row, r) =>
+        row.map((cell, c) => (
+          <Cell
+            key={`${r}-${c}`}
+            data={cell}
+            onClick={() => handleClick(r, c)}
+            onRightClick={isMobile ? undefined : (e) => handleRightClick(e, r, c)}
+            onTouchStart={isMobile ? () => handleTouchStart(r, c) : undefined}
+            onTouchEnd={isMobile ? handleTouchEnd : undefined}
+          />
+        ))
       )}
     </div>
-  );
-};
+
+    <button
+      onClick={resetGame}
+      style={{
+        background: 'pink',
+        padding: '8px 16px',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        borderRadius: '12px',
+        fontSize: '16px',
+      }}
+    >
+      🔁 リセット
+    </button>
+
+    {gameOver && (
+      <div style={{ marginTop: 20, fontSize: '24px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
+        {win ? '🎉 YOU WIN! 🎉' : '💥 YOU LOSE 💥'}
+      </div>
+    )}
+  </div>
+);
+}
 
 export default MinesweeperApp;
