@@ -185,7 +185,7 @@ const MinesweeperApp = () => {
         boxSizing: 'border-box',
       }}
     >
-      <h2 style={{ fontSize: '28px', marginBottom: '10px' }}>
+      <h2 style={{ fontSize: '22px', marginBottom: '10px' }}>
         最近フロントだけで楽してるしレポート終わったらDBと連携してタイム競えるようにする - {nickname}
       </h2>
 
