@@ -235,7 +235,7 @@ const MinesweeperApp = () => {
 
       {gameOver && (
   <div style={{ marginTop: 2, fontSize: '15px', fontWeight: 'bold', color: win ? 'green' : 'red' }}>
-    {win ? `🎉 ${nickname}さん、天才！ 🎉` : `🥰 ${nickname}さん、次また頑張ればいいんだよ 🥰`}
+    {win ? `🎉 ${nickname}さん、天才！ 🎉` : ` ${nickname}さん、次また頑張ればいいんだよ 😎`}
   </div>
 )}
 
