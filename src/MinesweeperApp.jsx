@@ -230,7 +230,7 @@ const MinesweeperApp = () => {
 
   {/* 長押し＆右クリックの説明 */}
   <div style={{ margin: '5px 0', fontSize: '14px', color: '#555' }}>
-  スマホだとちょっとやりにくいけどセルを長押しで旗立て、PCは右クリックで旗立てできるよ～🚩
+  🚩は右クリックまたは長押し
   </div>
 
 
