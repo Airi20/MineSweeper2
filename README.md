@@ -1,7 +1,7 @@
 ### マインスイーパー
 
 
-<img src="./taro-genius.jpg" width="300" /><img src="./jiro-try-again.jpg" width="300" /><img src="./nickname-input.jpg" width="300" />
+<img src="./taro-genius.jpg" width="300" />  <img src="./jiro-try-again.jpg" width="300" />  <img src="./nickname-input.jpg" width="300" />
 
 
 
