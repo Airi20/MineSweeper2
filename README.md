@@ -1,14 +1,9 @@
 ### マインスイーパー
-![ニックネームを入れることができる機能](./太郎さん天才.jpg)
 
-![ニックネームを入れることができる機能](./二郎さん次頑張ろう.jpg)
-
-<img src="./images/ニックネームを入れることができる機能.png" width="300" />
-
-
-![ニックネームを入れることができる機能](./ニックネーム記録.jpg)
-
-
+![勝利時の画面](./images/taro-genius.jpg)  
+![失敗時の画面](./images/jiro-try-again.jpg)  
+<img src="./images/nickname-input.png" width="300" />  
+![ニックネーム記録](./images/nickname-input.jpg)
 
 
 
