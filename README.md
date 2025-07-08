@@ -2,7 +2,9 @@
 
 ![勝利時の画面](./taro-genius.jpg)  
 ![失敗時の画面](./jiro-try-again.jpg)  
-<img src="./nickname-input.png" width="300" />  
+<img src="./taro-genius.jpg" width="100" />
+<img src="./jiro-try-again.jpg" width="100" />
+<img src="./nickname-input.jpg" width="100" />
 ![ニックネーム記録](./nickname-input.jpg)
 
 
