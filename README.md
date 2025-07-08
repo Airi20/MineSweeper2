@@ -1,31 +1,17 @@
-### マインスイーパー
+### 🎮 マインスイーパー
 
+<img src="./taro-genius.jpg" width="300" /> <img src="./jiro-try-again.jpg" width="300" /> <img src="./nickname-input.jpg" width="300" />
 
-<img src="./taro-genius.jpg" width="300" />  <img src="./jiro-try-again.jpg" width="300" />  <img src="./nickname-input.jpg" width="300" />
+誰もが知る隙間時間ゲーム、マインスイーパーをReactで再構築しました。  
+爆弾を押しても励ましてくれる設計により、モチベや自己肯定感を下げない優しいUIが特徴です。
 
+また、ニックネームを入力できるため、**自分の名前で励まされる**体験が可能です🌱  
+今後は、データベース連携による**タイム記録機能**や**ランキング**も実装予定！（時期未定）
 
+👉 **[プレイはこちら](https://mine-sweeper2.vercel.app/)**
 
-
-
-
-
-
-
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-
-© Airi  
+---
+© <span style="color: gray;">@Airi
 This code is for personal and educational use only.  
 Commercial use is strictly prohibited.
+</span>  
