@@ -1,9 +1,9 @@
 ### マインスイーパー
 
-![勝利時の画面](./images/taro-genius.jpg)  
-![失敗時の画面](./images/jiro-try-again.jpg)  
-<img src="./images/nickname-input.png" width="300" />  
-![ニックネーム記録](./images/nickname-input.jpg)
+![勝利時の画面](./taro-genius.jpg)  
+![失敗時の画面](./jiro-try-again.jpg)  
+<img src="./nickname-input.png" width="300" />  
+![ニックネーム記録](./nickname-input.jpg)
 
 
 
